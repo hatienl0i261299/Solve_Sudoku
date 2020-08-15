@@ -182,14 +182,13 @@ class GUI(QMainWindow, Ui_Form):
         self.btn_random_problem.setEnabled(True)
 
     def closeEvent(self, event):
-        # reply = QMessageBox.question(self, "Window Close", "Are you sure want to close ?",
-        #                              QMessageBox.Yes | QMessageBox.No)
-        # if reply == QMessageBox.Yes:
-        #     event.accept()
-        #     sys.exit()
-        # else:
-        #     event.ignore()
-        sys.exit()
+        reply = QMessageBox.question(self, "Window Close", "Are you sure want to close ?",
+                                     QMessageBox.Yes | QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            event.accept()
+            sys.exit()
+        else:
+            event.ignore()
 
     def run_solve(self):
         find = find_empty(self.board)
