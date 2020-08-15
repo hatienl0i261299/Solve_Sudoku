@@ -170,6 +170,7 @@ class GUI(QMainWindow, Ui_Form):
     def solve(self):
         self.btn_solve.setEnabled(False)
         self.btn_random_problem.setEnabled(False)
+        print("\nProblem: ")
         printsudoku(self.board)
         status = self.run_solve()
         if not status:
