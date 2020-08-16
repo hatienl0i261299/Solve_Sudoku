@@ -1,7 +1,7 @@
 try:
     import sys
     from PyQt5.QtTest import QTest
-    from PyQt5.QtWidgets import QApplication, QMainWindow, QTextEdit, QMessageBox
+    from PyQt5.QtWidgets import QApplication, QMainWindow, QTextEdit, QMessageBox, QLineEdit
     from random import randint
     import requests
 except ImportError:
@@ -157,15 +157,13 @@ class GUI(QMainWindow, Ui_Form):
     def init_display(self):
         for i in range(len(self.board)):
             for j in range(len(self.board[i])):
-                child = self.findChild(QTextEdit, f"txt_{i}_{j}")
+                child = self.findChild(QLineEdit, f"txt_{i}_{j}")
                 if self.board[i][j] != 0:
-                    child.setText(str(f"  {self.board[i][j]}"))
-                    child.setEnabled(False)
+                    child.setText(str(f"{self.board[i][j]}"))
+                    child.setStyleSheet(r'''QLineEdit{background-color: #d4d4d4; color: #000000;}''')
                 else:
                     child.setText(str(""))
-                    child.setReadOnly(True)
-                    child.setEnabled(True)
-                child.setStyleSheet(r'''QTextEdit {border: 1px solid #76797C; color: dark;}''')
+                    child.setStyleSheet(r''' QLineEdit {border: 1px solid #76797C;}''')
 
     def solve(self):
         self.btn_solve.setEnabled(False)
@@ -197,21 +195,22 @@ class GUI(QMainWindow, Ui_Form):
         else:
             row, col = find
         for i in range(1, 10):
-            if valid(self.board, (row, col), i):
+            if isValid(self.board, (row, col), i):
                 self.board[row][col] = i
-                child = self.findChild(QTextEdit, f"txt_{row}_{col}")
-                child.setText(str(f"  {i}"))
-                child.setStyleSheet(r'''QTextEdit { border: 2px solid #008000  }''')
+                child = self.findChild(QLineEdit, f"txt_{row}_{col}")
+                child.setText(str(f"{i}"))
+                child.setStyleSheet(r'''QLineEdit { border: 2px solid #008000;color: #000000;  }''')
                 QTest.qWait(100)
 
                 if self.run_solve():
                     return True
 
                 self.board[row][col] = 0
-                child = self.findChild(QTextEdit, f"txt_{row}_{col}")
-                child.setText(str(f"  {0}"))
-                child.setStyleSheet(r'''QTextEdit { border: 2px solid #FF0000  }''')
+                child = self.findChild(QLineEdit, f"txt_{row}_{col}")
+                child.setText(str(f"{0}"))
+                child.setStyleSheet(r''' QLineEdit { border: 2px solid #FF0000;color: #000000;  }''')
                 QTest.qWait(100)
+
         return False
 
 

@@ -1,7 +1,7 @@
 # ***Solve_Sudoku***
 ***Sudoku solver using the backtracking algorithm and Use PyQt5 to create an interface***
 
-[![Capture.png](https://i.postimg.cc/2SPhxrQL/Capture.png)](https://postimg.cc/18r8mxYy)
+[![Capture.png](https://i.postimg.cc/LXyzc22V/Capture.png)](https://postimg.cc/WFkFrRDD)
 
 # ***Module***
  - ***PyQt5***
